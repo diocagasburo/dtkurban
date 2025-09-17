@@ -1,0 +1,22 @@
+{
+  "name": "DropTicket",
+  "short_name": "Biglietto",
+  "start_url": ".",
+  "id": "/dtk3/",             
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#009688",
+  "description": "Applicazione per visualizzare il biglietto digitale.",
+  "icons": [
+    {
+      "src": "./images/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./images/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

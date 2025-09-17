@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Biglietto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#009688">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body>
+
+    <div id="loading-animation-container">
+        <lottie-player
+            id="lottie-animation"
+            src="refresh.json"
+            background="transparent"
+            speed="1"
+            style="width: 150px; height: 150px;"
+            autoplay
+            loop>
+        </lottie-player>
+    </div>
+
+    <header class="ticket-header">
+        <a href="#" id="open-dropticket">
+            <svg class="back-arrow-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </a>
+        <h2>Abbonamento annuale studenti <br> urbano</h2>
+        <span class="menu-dots" id="edit-toggle">&#8942;</span>
+    </header>
+
+    <section class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="anim.mp4" type="video/mp4">
+            Il tuo browser non supporta i video.
+        </video>
+        <div class="overlay-text">
+            <p class="agency-name">ARST</p>
+            <p class="ticket-type">Abbonamento annuale studenti urbano</p>
+        </div>
+        <div class="remaining-time-overlay">
+            <span>Rimanenti: 348 giorni 17 ore</span>
+        </div>
+    </section>
+
+    <main class="ticket-body">
+        <section class="qr-section">
+            <div class="qr-placeholder">
+                <img src="qr.png" alt="QR Code dell'abbonamento">
+            </div>
+            <p class="date-range">01/09/25 - 31/08/26</p>
+        </section>
+
+        <section class="details-list">
+            <div class="detail-row">
+                <span class="label">Codice</span>
+                <span class="value" id="ticket-code">T85136V9D</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Data di acquisto</span>
+                <span class="value" id="purchase-date">03/09/25</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Nome</span>
+                <span class="value" id="user-name">Antonio</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Cognome</span>
+                <span class="value" id="user-surname">Frau</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Tessera ARST</span>
+                <span class="value" id="arst-card">9Z7AE5Z</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Città</span>
+                <span class="value" id="user-city">ORISTANO</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Convalida</span>
+                <span class="value">03 set, 12:37</span>
+            </div>
+            </div>
+            <div class="detail-row">
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingAnimationContainer = document.getElementById('loading-animation-container');
+            
+            // Nasconde l'animazione dopo 2 secondi dal caricamento della pagina
+            setTimeout(() => {
+                loadingAnimationContainer.style.opacity = '0';
+                setTimeout(() => {
+                    loadingAnimationContainer.style.display = 'none';
+                }, 300); // Ritardo per la transizione di opacità
+            }, 2000); // Mostra l'animazione per 2 secondi
+
+            // Logica per l'apertura dell'app (se installata) con fallback
+            document.getElementById('open-dropticket').addEventListener('click', function(e) {
+                e.preventDefault();
+                const appUrl = 'dropticket://';
+                const storeUrl = 'https://play.google.com/store/apps/details?id=com.atono.dropticket';
+                window.location.href = appUrl;
+                setTimeout(function() {
+                    window.location.href = storeUrl;
+                }, 500);
+            });
+        });
+
+        // Logica per l'editing
+        document.addEventListener('DOMContentLoaded', () => {
+            const editToggle = document.getElementById('edit-toggle');
+            const editableFields = [
+                document.getElementById('ticket-code'),
+                document.getElementById('purchase-date'),
+                document.getElementById('user-name'),
+                document.getElementById('user-surname'),
+                document.getElementById('arst-card'),
+                document.getElementById('user-city')
+            ];
+
+            let isEditing = false;
+            editToggle.addEventListener('click', () => {
+                isEditing = !isEditing;
+                editableFields.forEach(field => {
+                    if (field) {
+                        field.contentEditable = isEditing;
+                        if (isEditing) {
+                            field.style.border = '1px solid #ccc';
+                            field.style.padding = '2px';
+                        } else {
+                            field.style.border = 'none';
+                            field.style.padding = '0';
+                        }
+                    }
+                });
+
+                if (isEditing) {
+                    editToggle.innerHTML = '&#10003;';
+                } else {
+                    editToggle.innerHTML = '&#8942;';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
