@@ -1,8 +1,8 @@
 {
   "name": "DropTicket",
-  "short_name": "Biglietto",
+  "short_name": "Urbano Biglietto",
   "start_url": ".",
-  "id": "/dtk3/",             
+  "id": "/dtkurban/",             
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#009688",
@@ -19,4 +19,5 @@
       "sizes": "512x512"
     }
   ]
+
 }
