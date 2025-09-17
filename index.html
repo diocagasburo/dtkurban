@@ -44,7 +44,7 @@
             <p class="ticket-type">Abbonamento annuale studenti urbano</p>
         </div>
         <div class="remaining-time-overlay">
-            <span>Rimanenti: 348 giorni 17 ore</span>
+            <span id="remaining-time"></span>
         </div>
     </section>
 
@@ -102,6 +102,27 @@
                     loadingAnimationContainer.style.display = 'none';
                 }, 300); // Ritardo per la transizione di opacità
             }, 2000); // Mostra l'animazione per 2 secondi
+
+            // Funzione per aggiornare il tempo rimanente (senza minuti e secondi)
+            function updateRemainingTime() {
+                const endDate = new Date('2026-08-31T23:59:59');
+                const now = new Date();
+                const difference = endDate.getTime() - now.getTime();
+
+                if (difference <= 0) {
+                    document.getElementById('remaining-time').textContent = 'Scaduto!';
+                    return;
+                }
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                document.getElementById('remaining-time').textContent = `Rimanenti: ${days} giorni ${hours} ore`;
+            }
+
+            // Aggiorna il tempo ogni secondo
+            setInterval(updateRemainingTime, 1000);
+            updateRemainingTime(); // Chiamata iniziale per evitare il ritardo di 1 secondo
 
             // Logica per l'apertura dell'app (se installata) con fallback
             document.getElementById('open-dropticket').addEventListener('click', function(e) {
