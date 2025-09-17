@@ -1,6 +1,6 @@
 {
-  "name": "DropTicket",
-  "short_name": "Urbano Biglietto",
+  "name": "DropTicket Urbano",
+  "short_name": "Urbano",
   "start_url": ".",
   "id": "/dtkurban/",             
   "display": "standalone",
@@ -21,3 +21,4 @@
   ]
 
 }
+
